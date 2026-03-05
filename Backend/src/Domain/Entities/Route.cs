@@ -1,0 +1,14 @@
+using System;
+
+namespace Domain.Entities
+{
+    public class Route
+    {
+        public Guid Id { get; set; }
+        public string Origin { get; set; } = string.Empty;
+        public string Points { get; set; } = string.Empty;
+        public string Destination { get; set; } = string.Empty;
+        public int DistanceKm { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    }
+}
