@@ -1,4 +1,4 @@
-namespace BusTicketing.Domain.Constants
+namespace Domain.Constants
 {
     public static class UserRoles
     {

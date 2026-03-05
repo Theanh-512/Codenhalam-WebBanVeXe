@@ -1,6 +1,6 @@
 using System;
 
-namespace BusTicketing.Domain.Entities
+namespace Domain.Entities
 {
     public class User
     {

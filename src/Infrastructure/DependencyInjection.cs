@@ -1,12 +1,12 @@
 using System.Text;
-using BusTicketing.Infrastructure.Persistence;
+using Infrastructure.Persistence;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 
-namespace BusTicketing.Infrastructure
+namespace Infrastructure
 {
     public static class DependencyInjection
     {

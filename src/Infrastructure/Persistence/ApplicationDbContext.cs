@@ -1,7 +1,7 @@
-using BusTicketing.Domain.Entities;
+using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace BusTicketing.Infrastructure.Persistence
+namespace Infrastructure.Persistence
 {
     public class ApplicationDbContext : DbContext
     {
