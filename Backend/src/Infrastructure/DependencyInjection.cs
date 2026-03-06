@@ -40,6 +40,8 @@ namespace Infrastructure
                 };
             });
 
+            services.AddScoped<Application.Interfaces.IAuthService, Infrastructure.Services.AuthService>();
+
             return services;
         }
     }
