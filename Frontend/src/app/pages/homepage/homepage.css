@@ -263,10 +263,6 @@
     flex: 2;
 }
 
-.input-col.ticket-col {
-    flex: 1;
-    /* Make 'Số vé' slightly smaller */
-}
 
 .input-col label {
     font-size: 14px;
@@ -329,17 +325,22 @@
 
 /* Date Slider Mini */
 .date-slider-col {
-    flex: 3;
+    flex: 2;
+    /* Equal width to other inputs */
     background: transparent;
     padding: 0;
     margin-left: 10px;
+    max-width: 325px;
+    /* Constrain the column to keep header aligned with dates */
 }
 
 .calendar-header-mini {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 5px;
+    margin-bottom: 3px;
+    width: 100%;
+    /* Now restricted by parent column natively */
 }
 
 .cal-title {
@@ -369,14 +370,67 @@
     cursor: pointer;
 }
 
+.dates-scroll-wrapper {
+    overflow-x: auto;
+    width: 100%;
+    max-width: 325px;
+    padding-bottom: 5px;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    /* Snap scrolling */
+}
+
+.dates-scroll-wrapper:hover {
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-color) #f0f2f8;
+}
+
+/* Chrome/Safari Custom Scrollbar */
+.dates-scroll-wrapper::-webkit-scrollbar {
+    height: 4px;
+    background: transparent;
+}
+
+.dates-scroll-wrapper::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 4px;
+}
+
+.dates-scroll-wrapper::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 4px;
+}
+
+.dates-scroll-wrapper:hover::-webkit-scrollbar-track {
+    background: #f0f2f8;
+}
+
+.dates-scroll-wrapper:hover::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+}
+
+.weeks-row {
+    display: flex;
+}
+
+.week-group {
+    scroll-snap-align: start;
+    display: flex;
+    flex-shrink: 0;
+    width: 325px;
+    /* Forces exactly one week per view width */
+}
+
 .dates-row-mini {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
-    gap: 5px;
+    gap: 8px;
     background: white;
     border-radius: var(--radius-md);
     padding: 5px 0;
+    width: 100%;
 }
 
 .date-item-mini {
@@ -387,6 +441,8 @@
     padding: 5px;
     position: relative;
     cursor: pointer;
+    flex: 1;
+    /* Stretch items evenly in 5-day group */
 }
 
 .date-item-mini .day {
@@ -574,7 +630,7 @@
     display: flex;
     gap: 20px;
     font-size: 14.5px;
-    color: #3c0781a9;
+    color: #4d0f9ea9;
     /* color: var(--text-light); */
 }
 

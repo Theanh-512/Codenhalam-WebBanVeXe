@@ -89,20 +89,33 @@
                             <div class="calendar-header-mini">
                                 <div class="cal-title">Ngày đi <i class="fas fa-chevron-left"></i> <i
                                         class="fas fa-chevron-right"></i></div>
-                                <button class="btn-month-mini"><i class="far fa-calendar"></i> Th 6</button>
+                                <label class="btn-month-mini" style="cursor: pointer; position: relative; margin: 0;"
+                                    (click)="showDatePicker(dateInput)">
+                                    <i class="far fa-calendar"></i> {{ currentMonthYearStr }}
+                                    <input #dateInput type="date" id="native-date-btn"
+                                        style="opacity: 0; position: absolute; left: 0; top: 0; width: 100%; height: 100%; cursor: pointer;"
+                                        (change)="onNativeDateChange($event)">
+                                </label>
                             </div>
-                            <div class="dates-row-mini">
-                                <div class="date-item-mini"><span class="day">T2</span><span class="num">23</span><span
-                                        class="dot-red"></span></div>
-                                <div class="date-item-mini"><span class="day">T3</span><span class="num">24</span></div>
-                                <div class="date-item-mini"><span class="day">T4</span><span class="num">25</span><span
-                                        class="dots-teal">...</span></div>
-                                <div class="date-item-mini active"><span class="day">T5</span><span
-                                        class="num">26</span></div>
-                                <div class="date-item-mini"><span class="day">T6</span><span class="num">27</span></div>
-                                <div class="date-item-mini"><span class="day">T7</span><span class="num">28</span></div>
-                                <div class="date-item-mini"><span class="day">CN</span><span class="num">29</span><span
-                                        class="dots-mix">..</span></div>
+                            <!-- Scrollable wrapper -->
+                            <div class="dates-scroll-wrapper" #scrollWrapper>
+                                <div class="weeks-row">
+                                    <div class="week-group" *ngFor="let group of datesGroupList">
+                                        <div class="dates-row-mini">
+                                            <div class="date-item-mini" *ngFor="let ds of group"
+                                                [class.active]="ds.date.getTime() === selectedDate.getTime()"
+                                                (click)="selectDate(ds)">
+                                                <span class="day">{{ds.dayName}}</span>
+                                                <span class="num">{{ds.dateNum}}</span>
+
+                                                <!-- Colorful Dots -->
+                                                <span *ngIf="ds.dotType === 'red'" class="dot-red"></span>
+                                                <span *ngIf="ds.dotType === 'teal'" class="dots-teal">...</span>
+                                                <span *ngIf="ds.dotType === 'mix'" class="dots-mix">..</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
