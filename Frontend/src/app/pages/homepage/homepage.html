@@ -1,0 +1,302 @@
+<div class="homepage-wrapper">
+
+    <!-- ===============================
+       1. HEADER 
+  ================================= -->
+    <header class="navbar">
+        <div class="container flex justify-between items-center h-full">
+            <!-- Logo Codenhalam -->
+            <a routerLink="/" class="logo">
+                <i class="fas fa-bus-alt"></i> Codenhalam - WebBanVeXe
+            </a>
+
+            <!-- Right Actions -->
+            <div class="nav-actions flex items-center">
+                <!-- Hotline Box -->
+                <div class="hotline-box" (click)="toggleHotline()">
+                    <div class="icon-circle">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <div class="text-info">
+                        <span class="label">Hotline 24/7</span>
+                        <span class="number" [class.show]="showingHotline">1900 1009</span>
+                        <span class="number-hidden" [class.hide]="showingHotline">Click để xem</span>
+                    </div>
+                </div>
+
+                <!-- Login Button -->
+                <a routerLink="/login" class="btn-login">
+                    <i class="far fa-user flex"></i> Đăng nhập
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===============================
+       2. BODY (Hero Search + Sections)
+  ================================= -->
+    <main class="main-content">
+
+        <!-- Hero Banner with Large Search Box -->
+        <section class="hero-section">
+            <div class="container hero-container">
+                <h1 class="hero-title">Hành trình vạn dặm bắt đầu từ <span>Codenhalam</span></h1>
+                <p class="hero-subtitle">Đặt vé xe khách trực tuyến dễ dàng, nhanh chóng và an toàn nhất</p>
+
+                <!-- Big Search Box -->
+                <!-- New Search Container (Image Concept) -->
+                <div class="search-container">
+
+                    <!-- Trip Type Selection -->
+                    <div class="trip-type">
+                        <label class="radio-label active">
+                            <input type="radio" name="tripType" checked>
+                            <span class="custom-radio"></span> Một chiều
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="tripType">
+                            <span class="custom-radio"></span> Khứ hồi
+                        </label>
+                    </div>
+
+                    <!-- Search Fields -->
+                    <div class="search-inputs">
+                        <!-- Origin -->
+                        <div class="input-col">
+                            <label>Điểm đi:</label>
+                            <div class="input-wrapper">
+                                <input type="text" placeholder="Hà nội">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+
+                        <!-- Swap -->
+                        <div class="swap-icon">
+                            <i class="fas fa-exchange-alt"></i>
+                        </div>
+
+                        <!-- Destination -->
+                        <div class="input-col">
+                            <label>Điểm đến:</label>
+                            <div class="input-wrapper">
+                                <input type="text" placeholder="Hồ Chí Minh">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+
+                        <!-- Date Slider -->
+                        <div class="input-col date-slider-col">
+                            <div class="calendar-header-mini">
+                                <div class="cal-title">Ngày đi <i class="fas fa-chevron-left"></i> <i
+                                        class="fas fa-chevron-right"></i></div>
+                                <button class="btn-month-mini"><i class="far fa-calendar"></i> Th 6</button>
+                            </div>
+                            <div class="dates-row-mini">
+                                <div class="date-item-mini"><span class="day">T2</span><span class="num">23</span><span
+                                        class="dot-red"></span></div>
+                                <div class="date-item-mini"><span class="day">T3</span><span class="num">24</span></div>
+                                <div class="date-item-mini"><span class="day">T4</span><span class="num">25</span><span
+                                        class="dots-teal">...</span></div>
+                                <div class="date-item-mini active"><span class="day">T5</span><span
+                                        class="num">26</span></div>
+                                <div class="date-item-mini"><span class="day">T6</span><span class="num">27</span></div>
+                                <div class="date-item-mini"><span class="day">T7</span><span class="num">28</span></div>
+                                <div class="date-item-mini"><span class="day">CN</span><span class="num">29</span><span
+                                        class="dots-mix">..</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Search Button Float -->
+                    <div class="search-btn-wrapper">
+                        <button class="btn-search-new">
+                            <i class="fas fa-search"></i> Tìm chuyến xe
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Popular Routes Section -->
+        <section class="popular-routes">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Tuyến Đường Phổ Biến</h2>
+                    <p>Khám phá những điểm đến được yêu thích nhất trong tuần</p>
+                </div>
+
+                <div class="route-grid">
+                    <!-- Route Card 1 -->
+                    <div class="route-card">
+                        <div class="route-img"
+                            style="background-image: url('https://img.freepik.com/free-photo/hoi-an-ancient-town-vietnam_268835-1327.jpg?w=740')">
+                            <span class="badge badge-sale">-10%</span>
+                        </div>
+                        <div class="route-info">
+                            <div class="route-header">
+                                <h3>Sài Gòn <i class="fas fa-long-arrow-alt-right"></i> Đà Lạt</h3>
+                                <span class="price">250.000đ</span>
+                            </div>
+                            <div class="route-footer">
+                                <span class="distance"><i class="fas fa-road"></i> 305km</span>
+                                <span class="time"><i class="far fa-clock"></i> 8 giờ</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Route Card 2 -->
+                    <div class="route-card">
+                        <div class="route-img"
+                            style="background-image: url('https://img.freepik.com/free-photo/beautiful-view-ha-long-bay-vietnam_181624-34539.jpg?w=740')">
+                        </div>
+                        <div class="route-info">
+                            <div class="route-header">
+                                <h3>Hà Nội <i class="fas fa-long-arrow-alt-right"></i> Hạ Long</h3>
+                                <span class="price">300.000đ</span>
+                            </div>
+                            <div class="route-footer">
+                                <span class="distance"><i class="fas fa-road"></i> 165km</span>
+                                <span class="time"><i class="far fa-clock"></i> 3 giờ</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Route Card 3 -->
+                    <div class="route-card">
+                        <div class="route-img"
+                            style="background-image: url('https://img.freepik.com/free-photo/nha-trang-beach-city-vietnam_181624-40662.jpg?w=740')">
+                            <span class="badge badge-hot">Hot</span>
+                        </div>
+                        <div class="route-info">
+                            <div class="route-header">
+                                <h3>Sài Gòn <i class="fas fa-long-arrow-alt-right"></i> Nha Trang</h3>
+                                <span class="price">320.000đ</span>
+                            </div>
+                            <div class="route-footer">
+                                <span class="distance"><i class="fas fa-road"></i> 430km</span>
+                                <span class="time"><i class="far fa-clock"></i> 9.5 giờ</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- News & Offers Section -->
+        <section class="offers-section">
+            <div class="container dual-cols">
+                <!-- Offers -->
+                <div class="promotions">
+                    <div class="section-title">
+                        <h2>Ưu Đãi Nổi Bật</h2>
+                    </div>
+                    <div class="promo-box flex items-center">
+                        <div class="promo-icon"><i class="fas fa-gift"></i></div>
+                        <div class="promo-text">
+                            <h4>Giảm ngay 50k cho thành viên mới</h4>
+                            <p>Nhập mã <strong class="text-primary">VEXE50K</strong> khi đặt chuyến đầu tiên qua ứng
+                                dụng.</p>
+                        </div>
+                        <button class="btn-copy">Copy Mã</button>
+                    </div>
+                    <div class="promo-box flex items-center">
+                        <div class="promo-icon bg-orange"><i class="fas fa-percent"></i></div>
+                        <div class="promo-text">
+                            <h4>Hoàn tiền 10% thanh toán VNPAY</h4>
+                            <p>Áp dụng cho mọi chuyến đi khi thanh toán quét mã QR VNPAY.</p>
+                        </div>
+                        <button class="btn-copy">Chi tiết</button>
+                    </div>
+                </div>
+
+                <!-- News -->
+                <div class="news">
+                    <div class="section-title">
+                        <h2>Thông Báo Mới</h2>
+                    </div>
+                    <ul class="news-list">
+                        <li>
+                            <span class="news-date">Hôm nay</span>
+                            <a href="#">Mở bán vé xe TẾT 2027 với hàng nghìn ghế Limousine VIP</a>
+                        </li>
+                        <li>
+                            <span class="news-date">Hôm qua</span>
+                            <a href="#">Thông báo thay đổi điểm đón trả khách tại trạm Bến xe Miền Đông mới</a>
+                        </li>
+                        <li>
+                            <span class="news-date">2 ngày trước</span>
+                            <a href="#">Cảnh báo tình trạng lừa đảo bán vé xe ảo trên mạng</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ===============================
+       3. FOOTER
+  ================================= -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <!-- Col 1 -->
+            <div class="foot-col">
+                <a routerLink="/" class="logo foot-logo">
+                    <i class="fas fa-bus-alt"></i> Codenhalam
+                </a>
+                <p class="foot-desc">Hệ thống đặt vé xe khách trực tuyến tiên phong, mang lại trải nghiệm tiện lợi và an
+                    toàn cho mọi chuyến đi.</p>
+                <div class="socials">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+
+            <!-- Col 2 -->
+            <div class="foot-col">
+                <h4>Về Chúng Tôi</h4>
+                <ul>
+                    <li><a href="#">Giới thiệu Codenhalam</a></li>
+                    <li><a href="#">Quy chế hoạt động</a></li>
+                    <li><a href="#">Bảo mật thông tin</a></li>
+                    <li><a href="#">Giải quyết tranh chấp</a></li>
+                </ul>
+            </div>
+
+            <!-- Col 3 -->
+            <div class="foot-col">
+                <h4>Hỗ Trợ Hành Khách</h4>
+                <ul>
+                    <li><a href="#">Hướng dẫn đặt vé</a></li>
+                    <li><a href="#">Câu hỏi thường gặp</a></li>
+                    <li><a href="#">Chính sách hủy vé</a></li>
+                    <li><a href="#">Tổng đài: 1900 1009</a></li>
+                </ul>
+            </div>
+
+            <!-- Col 4 -->
+            <div class="foot-col">
+                <h4>Đối Tác</h4>
+                <ul>
+                    <li><a href="#">Đăng ký nhà xe mới</a></li>
+                    <li><a href="#">Phần mềm quản lý đại lý</a></li>
+                </ul>
+                <div class="download-app mt-3">
+                    <h4>Tải Ứng Dụng</h4>
+                    <div class="app-badges flex gap-2 mt-2">
+                        <i class="fab fa-apple fa-2x text-white"></i>
+                        <i class="fab fa-google-play fa-2x text-white"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container text-center">
+                <p>&copy; 2026 Codenhalam - WebBanVeXe. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+</div>
