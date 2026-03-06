@@ -159,14 +159,16 @@
 }
 
 .hero-title {
-    font-size: 42px;
+    font-family: Arial;
+    font-size: 46px;
+    font-style: bold;
     color: white;
     margin-bottom: 15px;
     font-weight: 700;
 }
 
 .hero-title span {
-    color: #ffda79;
+    color: rgba(247, 174, 78, 0.9);
 }
 
 .hero-subtitle {
@@ -209,9 +211,10 @@
     display: flex;
     align-items: center;
     gap: 8px;
+    font-family: Arial;
     font-size: 15px;
     font-weight: 600;
-    color: #0d0d44;
+    color: var(--primary-color);
     cursor: pointer;
 }
 
@@ -265,9 +268,12 @@
 
 
 .input-col label {
-    font-size: 14px;
+    font-family: Arial;
+    font-size: 16px;
     font-weight: 600;
+    font-style: normal;
     color: #1a1a24;
+
 }
 
 .input-wrapper {
@@ -290,25 +296,25 @@
     border: none;
     outline: none;
     width: 100%;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 500;
-    color: #1a1a24;
+    color: #9999b9;
     background: transparent;
 }
 
 .input-wrapper input::placeholder {
-    color: #1a1a24;
+    color: #cecee6;
 }
 
 .input-wrapper i {
     color: var(--text-light);
-    font-size: 14px;
+    font-size: 1px;
     margin-left: 10px;
     cursor: pointer;
 }
 
 .input-wrapper .fa-calendar-alt {
-    color: #1a1a24;
+    color: #140111;
     margin-right: 5px;
 }
 
@@ -344,7 +350,8 @@
 }
 
 .cal-title {
-    font-size: 14px;
+    font-family: Arial;
+    font-size: 15px;
     font-weight: 600;
     color: #1a1a24;
 }
