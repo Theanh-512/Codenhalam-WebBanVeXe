@@ -33,6 +33,20 @@ namespace Infrastructure.Persistence
                 entity.Property(e => e.FullName).HasMaxLength(150);
                 entity.Property(e => e.PhoneNumber).HasMaxLength(20);
                 entity.HasIndex(e => e.Email).IsUnique();
+
+                // Seed Data
+                entity.HasData(new User
+                {
+                    Id = System.Guid.Parse("11111111-1111-1111-1111-111111111111"),
+                    UserName = "admin",
+                    Email = "admin@vexesystem.com",
+                    FullName = "System Administrator",
+                    PhoneNumber = "0123456789",
+                    PasswordHash = "$2a$11$0nK18Qc7D8N94B3U3P6S/OGfN9f4v.T2H6zH/r4O/C5v.Q/b4XvG6", // Fixed Hash for "Admin@123" to avoid EF pending model changes
+                    Role = "Admin",
+                    IsActive = true,
+                    CreatedAt = new System.DateTime(2026, 1, 1, 0, 0, 0, System.DateTimeKind.Utc)
+                });
             });
 
             // Configure Route
@@ -56,8 +70,8 @@ namespace Infrastructure.Persistence
             {
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.Price).HasPrecision(18, 2);
-                entity.HasOne(e => e.Route).WithMany().HasForeignKey(e => e.RouteId);
-                entity.HasOne(e => e.Bus).WithMany().HasForeignKey(e => e.BusId);
+                entity.HasOne(e => e.Route).WithMany().HasForeignKey(e => e.RouteId).OnDelete(DeleteBehavior.Restrict);
+                entity.HasOne(e => e.Bus).WithMany().HasForeignKey(e => e.BusId).OnDelete(DeleteBehavior.Restrict);
             });
 
             // Configure Seat
@@ -65,7 +79,7 @@ namespace Infrastructure.Persistence
             {
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.SeatNumber).IsRequired().HasMaxLength(10);
-                entity.HasOne(e => e.Trip).WithMany().HasForeignKey(e => e.TripId);
+                entity.HasOne(e => e.Trip).WithMany().HasForeignKey(e => e.TripId).OnDelete(DeleteBehavior.Restrict);
             });
 
             // Configure Booking
@@ -73,8 +87,8 @@ namespace Infrastructure.Persistence
             {
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.TotalAmount).HasPrecision(18, 2);
-                entity.HasOne(e => e.User).WithMany().HasForeignKey(e => e.UserId);
-                entity.HasOne(e => e.Trip).WithMany().HasForeignKey(e => e.TripId);
+                entity.HasOne(e => e.User).WithMany().HasForeignKey(e => e.UserId).OnDelete(DeleteBehavior.Restrict);
+                entity.HasOne(e => e.Trip).WithMany().HasForeignKey(e => e.TripId).OnDelete(DeleteBehavior.Restrict);
             });
 
             // Configure BookingDetail
@@ -82,8 +96,8 @@ namespace Infrastructure.Persistence
             {
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.Price).HasPrecision(18, 2);
-                entity.HasOne(e => e.Booking).WithMany().HasForeignKey(e => e.BookingId);
-                entity.HasOne(e => e.Seat).WithMany().HasForeignKey(e => e.SeatId);
+                entity.HasOne(e => e.Booking).WithMany().HasForeignKey(e => e.BookingId).OnDelete(DeleteBehavior.Restrict);
+                entity.HasOne(e => e.Seat).WithMany().HasForeignKey(e => e.SeatId).OnDelete(DeleteBehavior.Restrict);
             });
 
             // Configure Payment
@@ -93,7 +107,7 @@ namespace Infrastructure.Persistence
                 entity.Property(e => e.Amount).HasPrecision(18, 2);
                 entity.Property(e => e.PaymentMethod).HasMaxLength(50);
                 entity.Property(e => e.TransactionCode).HasMaxLength(100);
-                entity.HasOne(e => e.Booking).WithMany().HasForeignKey(e => e.BookingId);
+                entity.HasOne(e => e.Booking).WithMany().HasForeignKey(e => e.BookingId).OnDelete(DeleteBehavior.Restrict);
             });
 
             // Configure Invoice
@@ -102,7 +116,7 @@ namespace Infrastructure.Persistence
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.InvoiceNumber).IsRequired().HasMaxLength(50);
                 entity.Property(e => e.TotalAmount).HasPrecision(18, 2);
-                entity.HasOne(e => e.Booking).WithMany().HasForeignKey(e => e.BookingId);
+                entity.HasOne(e => e.Booking).WithMany().HasForeignKey(e => e.BookingId).OnDelete(DeleteBehavior.Restrict);
             });
 
             // Configure Notification
@@ -110,7 +124,7 @@ namespace Infrastructure.Persistence
             {
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.Title).IsRequired().HasMaxLength(200);
-                entity.HasOne(e => e.User).WithMany().HasForeignKey(e => e.UserId);
+                entity.HasOne(e => e.User).WithMany().HasForeignKey(e => e.UserId).OnDelete(DeleteBehavior.Restrict);
             });
         }
     }
