@@ -49,12 +49,16 @@
 
                     <!-- Trip Type Selection -->
                     <div class="trip-type">
-                        <label class="radio-label active">
-                            <input type="radio" name="tripType" checked>
+                        <label class="radio-label" [class.active]="tripType === 'oneWay'"
+                            (click)="setTripType('oneWay')">
+                            <input type="radio" name="tripType" [checked]="tripType === 'oneWay'"
+                                (change)="setTripType('oneWay')">
                             <span class="custom-radio"></span> Một chiều
                         </label>
-                        <label class="radio-label">
-                            <input type="radio" name="tripType">
+                        <label class="radio-label" [class.active]="tripType === 'roundTrip'"
+                            (click)="setTripType('roundTrip')">
+                            <input type="radio" name="tripType" [checked]="tripType === 'roundTrip'"
+                                (change)="setTripType('roundTrip')">
                             <span class="custom-radio"></span> Khứ hồi
                         </label>
                     </div>
@@ -62,25 +66,49 @@
                     <!-- Search Fields -->
                     <div class="search-inputs">
                         <!-- Origin -->
-                        <div class="input-col">
+                        <div class="input-col relative">
                             <label>Điểm đi:</label>
                             <div class="input-wrapper">
-                                <input type="text" placeholder="Hà nội">
+                                <input type="text" placeholder="Hà Nội" [(ngModel)]="origin"
+                                    (focus)="showOriginDropdown = true" (blur)="onBlurOrigin()"
+                                    style="text-transform: capitalize;">
                                 <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <!-- Dropdown -->
+                            <div class="dropdown-list" *ngIf="showOriginDropdown">
+                                <div class="dropdown-item" *ngFor="let p of filteredOrigins"
+                                    (mousedown)="selectOrigin(p)">
+                                    {{ p }}
+                                </div>
+                                <div class="dropdown-item no-result" *ngIf="filteredOrigins.length === 0">
+                                    Không tìm thấy địa điểm hoặc đã chọn ở điểm đến.
+                                </div>
                             </div>
                         </div>
 
                         <!-- Swap -->
-                        <div class="swap-icon">
+                        <div class="swap-icon" style="cursor: pointer;" (click)="swapLocations()">
                             <i class="fas fa-exchange-alt"></i>
                         </div>
 
                         <!-- Destination -->
-                        <div class="input-col">
+                        <div class="input-col relative">
                             <label>Điểm đến:</label>
                             <div class="input-wrapper">
-                                <input type="text" placeholder="Hồ Chí Minh">
+                                <input type="text" placeholder="Hồ Chí Minh" [(ngModel)]="destination"
+                                    (focus)="showDestinationDropdown = true" (blur)="onBlurDestination()"
+                                    style="text-transform: capitalize;">
                                 <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <!-- Dropdown -->
+                            <div class="dropdown-list" *ngIf="showDestinationDropdown">
+                                <div class="dropdown-item" *ngFor="let p of filteredDestinations"
+                                    (mousedown)="selectDestination(p)">
+                                    {{ p }}
+                                </div>
+                                <div class="dropdown-item no-result" *ngIf="filteredDestinations.length === 0">
+                                    Không tìm thấy địa điểm hoặc đã chọn ở điểm đi.
+                                </div>
                             </div>
                         </div>
 
