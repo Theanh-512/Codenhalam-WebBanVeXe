@@ -197,6 +197,7 @@
     display: flex;
     flex-direction: column;
     gap: 020px;
+    z-index: 10;
 }
 
 /* Trip Type Radio Buttons */
@@ -858,4 +859,52 @@
     .footer-grid {
         grid-template-columns: 1fr;
     }
+}
+
+/* Dropdown Styles */
+.input-col.relative {
+    position: relative;
+}
+
+.dropdown-list {
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 0;
+    right: 0;
+    background: white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-radius: var(--radius-md);
+    max-height: 250px;
+    overflow-y: auto;
+    z-index: 1000;
+    border: 1px solid #e0e4f0;
+}
+
+.dropdown-item {
+    padding: 12px 15px;
+    cursor: pointer;
+    font-family: Arial;
+    font-size: 15px;
+    color: #1a1a24;
+    border-bottom: 1px solid #f0f2f8;
+    transition: background-color 0.2s;
+}
+
+.dropdown-item:last-child {
+    border-bottom: none;
+}
+
+.dropdown-item:hover {
+    background-color: #f0f2f8;
+    color: var(--primary-color);
+}
+
+.dropdown-item.no-result {
+    color: var(--text-light);
+    cursor: default;
+}
+
+.dropdown-item.no-result:hover {
+    background-color: white;
+    color: var(--text-light);
 }
