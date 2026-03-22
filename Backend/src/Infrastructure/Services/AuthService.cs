@@ -27,7 +27,6 @@ namespace Infrastructure.Services
 
         public async Task<AuthResponseDto> LoginAsync(LoginRequestDto request)
         {
-            // Cho phép đăng nhập bằng cả Username hoặc Email
             var user = await _context.Users.FirstOrDefaultAsync(u => u.UserName == request.UserName || u.Email == request.UserName);
             if (user == null || !BCrypt.Net.BCrypt.Verify(request.Password, user.PasswordHash))
             {
@@ -53,6 +52,7 @@ namespace Infrastructure.Services
                 Success = true,
                 Message = "Login successful",
                 Token = token,
+                UserId = user.Id.ToString(),
                 UserName = user.UserName,
                 Role = user.Role
             };
@@ -92,6 +92,7 @@ namespace Infrastructure.Services
                 Success = true,
                 Message = "Registration successful",
                 Token = token,
+                UserId = user.Id.ToString(),
                 UserName = user.UserName,
                 Role = user.Role
             };

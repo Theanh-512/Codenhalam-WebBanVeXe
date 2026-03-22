@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import { TripService, Trip } from '../../services/trip.service';
 
 @Component({
     selector: 'app-homepage',
@@ -24,9 +25,55 @@ export class Homepage implements AfterViewInit, OnInit, OnDestroy {
 
     constructor(
         public authService: AuthService,
-        private router: Router // Inject Router
+        private tripService: TripService, // Inject TripService
+        private router: Router
     ) {
         this.currentUser = this.authService.getUser();
+    }
+
+    trips: any[] = [];
+    isSearching = false;
+
+    searchTrips() {
+        if (!this.origin || !this.destination) {
+            alert('Vui lòng chọn điểm đi và điểm đến');
+            return;
+        }
+        this.isSearching = true;
+
+        // Alias mapping for flexible search
+        const getAliases = (name: string) => {
+            const low = name.toLowerCase();
+            if (low === 'hồ chí minh' || low === 'tp. hcm' || low === 'hcm') return ['sài gòn', 'hồ chí minh', 'hcm'];
+            if (low === 'lâm đồng') return ['đà lạt', 'lâm đồng', 'bao loc'];
+            return [low];
+        };
+
+        const originAliases = getAliases(this.origin);
+        const destAliases = getAliases(this.destination);
+
+        this.tripService.getTrips().subscribe({
+            next: (data) => {
+                this.trips = data.filter(t => {
+                    const routeLow = t.routeName?.toLowerCase() || '';
+                    const matchesOrigin = originAliases.some(alias => routeLow.includes(alias));
+                    const matchesDest = destAliases.some(alias => routeLow.includes(alias));
+                    return matchesOrigin && matchesDest;
+                });
+                this.isSearching = false;
+                if (this.trips.length === 0) {
+                    alert('Không tìm thấy chuyến xe phù hợp');
+                }
+            },
+            error: () => {
+                this.isSearching = false;
+                alert('Có lỗi xảy ra khi tìm chuyến xe');
+            }
+        });
+    }
+
+    bookTrip(tripId: string) {
+        this.router.navigate(['/booking', tripId]);
     }
 
     @HostListener('window:scroll', [])
@@ -65,8 +112,8 @@ export class Homepage implements AfterViewInit, OnInit, OnDestroy {
         'An Giang', 'Bà Rịa - Vũng Tàu', 'Bạc Liêu', 'Bắc Giang', 'Bắc Kạn', 'Bắc Ninh', 'Bến Tre', 'Bình Dương',
         'Bình Định', 'Bình Phước', 'Bình Thuận', 'Cà Mau', 'Cao Bằng', 'Cần Thơ', 'Đà Nẵng', 'Đắk Lắk', 'Đắk Nông',
         'Điện Biên', 'Đồng Nai', 'Đồng Tháp', 'Gia Lai', 'Hà Giang', 'Hà Nam', 'Hà Nội', 'Hà Tĩnh', 'Hải Dương',
-        'Hải Phòng', 'Hậu Giang', 'Hòa Bình', 'Hồ Chí Minh', 'Hưng Yên', 'Khánh Hòa', 'Kiên Giang', 'Kon Tum',
-        'Lai Châu', 'Lạng Sơn', 'Lào Cai', 'Lâm Đồng', 'Long An', 'Nam Định', 'Nghệ An', 'Ninh Bình', 'Ninh Thuận',
+        'Hải Phòng', 'Hậu Giang', 'Hòa Bình', 'Hồ Chí Minh', 'Sài Gòn', 'Hưng Yên', 'Khánh Hòa', 'Kiên Giang', 'Kon Tum',
+        'Lai Châu', 'Lạng Sơn', 'Lào Cai', 'Lâm Đồng', 'Đà Lạt', 'Long An', 'Nam Định', 'Nghệ An', 'Ninh Bình', 'Ninh Thuận',
         'Phú Thọ', 'Phú Yên', 'Quảng Bình', 'Quảng Nam', 'Quảng Ngãi', 'Quảng Ninh', 'Quảng Trị', 'Sóc Trăng',
         'Sơn La', 'Tây Ninh', 'Thái Bình', 'Thái Nguyên', 'Thanh Hóa', 'Thừa Thiên Huế', 'Tiền Giang', 'Trà Vinh',
         'Tuyên Quang', 'Vĩnh Long', 'Vĩnh Phúc', 'Yên Bái'

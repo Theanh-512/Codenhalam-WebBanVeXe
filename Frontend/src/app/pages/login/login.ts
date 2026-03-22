@@ -44,10 +44,11 @@ export class Login implements OnInit {
       next: (response) => {
         this.isLoading = false;
         if (response.success && response.token) {
+          const uId = response.userId || response.UserId || response['id'] || '';
           const uName = response.userName || response.UserName || response['userName'] || 'Thành viên';
           const uRole = response.role || response.Role || response['role'] || 'Customer';
           
-          this.authService.saveUser(response.token, uName, uRole);
+          this.authService.saveUser(response.token, uId, uName, uRole);
           this.toastService.showSuccess(`Chào mừng trở lại, ${uName}!`);
           this.router.navigateByUrl(this.returnUrl); 
         } else {

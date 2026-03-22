@@ -42,7 +42,7 @@ namespace Infrastructure.Persistence
                     Email = "admin@vexesystem.com",
                     FullName = "System Administrator",
                     PhoneNumber = "0123456789",
-                    PasswordHash = "$2a$11$0nK18Qc7D8N94B3U3P6S/OGfN9f4v.T2H6zH/r4O/C5v.Q/b4XvG6", // Fixed Hash for "Admin@123" to avoid EF pending model changes
+                    PasswordHash = "$2a$11$6qkJTnDJ8oSW9eiB7SUhcuD34W6GjSDNJiqqsQXtD0RVKd/AKyEDq", // Verified Hash for "Admin@123"
                     Role = "Admin",
                     IsActive = true,
                     CreatedAt = new System.DateTime(2026, 1, 1, 0, 0, 0, System.DateTimeKind.Utc)
@@ -59,6 +59,17 @@ namespace Infrastructure.Persistence
                 entity.Property(e => e.IsActive).HasDefaultValue(true);
                 entity.Property(e => e.CreatedAt).IsRequired();
                 entity.Property(e => e.UpdatedAt).IsRequired(false);
+
+                // Seed Data
+                entity.HasData(new Route
+                {
+                    Id = System.Guid.Parse("22222222-2222-2222-2222-222222222222"),
+                    Origin = "Sài Gòn",
+                    Destination = "Đà Lạt",
+                    DistanceKm = 300,
+                    IsActive = true,
+                    CreatedAt = new System.DateTime(2026, 3, 22, 0, 0, 0, System.DateTimeKind.Utc)
+                });
             });
 
             // Configure Bus
@@ -66,6 +77,16 @@ namespace Infrastructure.Persistence
             {
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.PlateNumber).IsRequired().HasMaxLength(50);
+
+                // Seed Data
+                entity.HasData(new Bus
+                {
+                    Id = System.Guid.Parse("33333333-3333-3333-3333-333333333333"),
+                    PlateNumber = "51B-12345",
+                    BusType = Domain.Enums.BusType.Limousine,
+                    SeatCapacity = 30,
+                    IsActive = true
+                });
             });
 
             // Configure Trip
@@ -75,6 +96,19 @@ namespace Infrastructure.Persistence
                 entity.Property(e => e.Price).HasPrecision(18, 2);
                 entity.HasOne(e => e.Route).WithMany(r => r.Trips).HasForeignKey(e => e.RouteId).OnDelete(DeleteBehavior.Restrict);
                 entity.HasOne(e => e.Bus).WithMany(b => b.Trips).HasForeignKey(e => e.BusId).OnDelete(DeleteBehavior.Restrict);
+
+                // Seed Data
+                entity.HasData(new Trip
+                {
+                    Id = System.Guid.Parse("44444444-4444-4444-4444-444444444444"),
+                    RouteId = System.Guid.Parse("22222222-2222-2222-2222-222222222222"),
+                    BusId = System.Guid.Parse("33333333-3333-3333-3333-333333333333"),
+                    DepartureTime = new System.DateTime(2026, 3, 23, 8, 0, 0, System.DateTimeKind.Utc),
+                    ArrivalTime = new System.DateTime(2026, 3, 23, 14, 0, 0, System.DateTimeKind.Utc),
+                    Price = 250000,
+                    Status = Domain.Enums.TripStatus.Active,
+                    CreatedAt = new System.DateTime(2026, 3, 22, 0, 0, 0, System.DateTimeKind.Utc)
+                });
             });
 
             // Configure Seat
@@ -83,6 +117,18 @@ namespace Infrastructure.Persistence
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.SeatNumber).IsRequired().HasMaxLength(10);
                 entity.HasOne(e => e.Trip).WithMany(t => t.Seats).HasForeignKey(e => e.TripId).OnDelete(DeleteBehavior.Restrict);
+
+                // Seed Seats
+                for (int i = 1; i <= 10; i++)
+                {
+                    entity.HasData(new Seat
+                    {
+                        Id = System.Guid.Parse($"55555555-5555-5555-5555-{i:D12}"),
+                        TripId = System.Guid.Parse("44444444-4444-4444-4444-444444444444"),
+                        SeatNumber = $"A{i}",
+                        Status = Domain.Enums.SeatStatus.Available
+                    });
+                }
             });
 
             // Configure Booking

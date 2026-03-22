@@ -77,5 +77,12 @@ namespace Api.Controllers
             if (!success) return NotFound();
             return NoContent();
         }
+
+        [HttpGet("{id}/seats")]
+        public async Task<ActionResult<IEnumerable<SeatDto>>> GetSeats(Guid id)
+        {
+            var seats = await _tripService.GetSeatsByTripIdAsync(id);
+            return Ok(seats);
+        }
     }
 }

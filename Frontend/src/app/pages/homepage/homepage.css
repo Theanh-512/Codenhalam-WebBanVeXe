@@ -1177,6 +1177,105 @@ input:checked+.slider:before {
     color: var(--primary-color);
 }
 
+/* Search Results */
+.search-results {
+    padding: 60px 0;
+    background: #fdf2f2;
+}
+
+.trip-results-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.trip-card {
+    display: flex;
+    justify-content: space-between;
+    padding: 25px;
+    border-radius: 15px;
+    transition: transform 0.3s ease;
+}
+
+.trip-card:hover {
+    transform: translateX(10px);
+}
+
+.trip-main {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+.trip-time-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.trip-time-info .time {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #333;
+}
+
+.route-line {
+    width: 2px;
+    height: 30px;
+    background: #ddd;
+    position: relative;
+}
+
+.route-line::before, .route-line::after {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: var(--primary-color, #ff6b6b);
+    border-radius: 50%;
+    left: -3px;
+}
+
+.route-line::before { top: 0; }
+.route-line::after { bottom: 0; }
+
+.trip-route-info h3 {
+    margin: 0 0 5px 0;
+    color: #333;
+}
+
+.trip-route-info p {
+    margin: 0;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.trip-side {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 15px;
+}
+
+.trip-side .price {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--primary-color, #ff6b6b);
+}
+
+.btn-book-now {
+    padding: 12px 30px;
+    background: var(--gradient, linear-gradient(135deg, #ff6b6b, #ff5252));
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(255,107,107,0.3);
+}
+
 /* ===========================
    3. FOOTER
 ============================== */

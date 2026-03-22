@@ -217,11 +217,41 @@
 
                     <!-- Search Button Float -->
                     <div class="search-btn-wrapper">
-                        <button class="btn-search-new">
-                            <i class="fas fa-search"></i> Tìm chuyến xe
+                        <button class="btn-search-new" (click)="searchTrips()" [disabled]="isSearching">
+                            <i class="fas" [class.fa-search]="!isSearching" [class.fa-spinner]="isSearching" [class.fa-spin]="isSearching"></i> 
+                            {{ isSearching ? 'Đang tìm...' : 'Tìm chuyến xe' }}
                         </button>
                     </div>
 
+                </div>
+            </div>
+        </section>
+
+        <!-- Search Results Section -->
+        <section class="search-results" *ngIf="trips.length > 0">
+            <div class="container">
+                <div class="section-title left-align">
+                    <h2>Kết quả tìm kiếm</h2>
+                    <p>Tìm thấy {{ trips.length }} chuyến xe từ {{ origin }} đến {{ destination }}</p>
+                </div>
+                <div class="trip-results-grid">
+                    <div class="trip-card glass-card" *ngFor="let trip of trips">
+                        <div class="trip-main">
+                            <div class="trip-time-info">
+                                <div class="time">{{ trip.departureTime | date:'HH:mm' }}</div>
+                                <div class="route-line"></div>
+                                <div class="time">{{ trip.arrivalTime | date:'HH:mm' }}</div>
+                            </div>
+                            <div class="trip-route-info">
+                                <h3>{{ trip.routeName }}</h3>
+                                <p><i class="fas fa-bus"></i> {{ trip.busPlate }}</p>
+                            </div>
+                        </div>
+                        <div class="trip-side">
+                            <div class="price">{{ trip.price | currency:'VND' }}</div>
+                            <button class="btn-book-now" (click)="bookTrip(trip.id)">Chọn chỗ</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>

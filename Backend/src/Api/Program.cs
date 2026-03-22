@@ -3,6 +3,9 @@ using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Fix for Npgsql timestamp behavior in .NET 6+
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddInfrastructure(builder.Configuration);

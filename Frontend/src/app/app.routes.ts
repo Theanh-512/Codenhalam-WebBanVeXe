@@ -6,6 +6,7 @@ import { Homepage } from './pages/homepage/homepage';
 import { ResourceManagement } from './pages/resource-management/resource-management';
 import { TripManagement } from './pages/trip-management/trip-management';
 import { UserManagement } from './pages/user-management/user-management';
+import { Booking } from './pages/booking/booking';
 import { AuthGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
@@ -32,6 +33,7 @@ export const routes: Routes = [
   { path: 'dashboard', component: Dashboard },
   { path: 'login', component: Login },
   { path: 'register', component: Register },
+  { path: 'booking/:id', component: Booking },
   { path: '**', redirectTo: 'dashboard' }
 ];
 

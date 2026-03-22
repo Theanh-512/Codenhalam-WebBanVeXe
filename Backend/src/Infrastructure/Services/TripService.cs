@@ -103,6 +103,20 @@ namespace Infrastructure.Services
             return true;
         }
 
+        public async Task<IEnumerable<SeatDto>> GetSeatsByTripIdAsync(Guid tripId)
+        {
+            var trip = await _tripRepository.GetByIdAsync(tripId);
+            if (trip == null) return Enumerable.Empty<SeatDto>();
+
+            return trip.Seats.Select(s => new SeatDto
+            {
+                Id = s.Id,
+                TripId = s.TripId,
+                SeatNumber = s.SeatNumber,
+                Status = s.Status.ToString()
+            });
+        }
+
         private TripDto MapToDto(Trip trip)
         {
             return new TripDto

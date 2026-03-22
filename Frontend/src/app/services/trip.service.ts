@@ -14,6 +14,13 @@ export interface Trip {
   status: string;
 }
 
+export interface Seat {
+  id: string;
+  tripId: string;
+  seatNumber: string;
+  status: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -40,5 +47,9 @@ export class TripService {
 
   deleteTrip(id: string): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`);
+  }
+
+  getSeats(tripId: string): Observable<Seat[]> {
+    return this.http.get<Seat[]>(`${this.apiUrl}/${tripId}/seats`);
   }
 }

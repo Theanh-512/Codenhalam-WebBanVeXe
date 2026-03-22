@@ -12,5 +12,6 @@ namespace Application.Interfaces
         Task<TripDto> CreateTripAsync(CreateTripDto createTripDto);
         Task<bool> UpdateTripAsync(Guid id, UpdateTripDto updateTripDto);
         Task<bool> DeleteTripAsync(Guid id);
+        Task<IEnumerable<SeatDto>> GetSeatsByTripIdAsync(Guid tripId);
     }
 }

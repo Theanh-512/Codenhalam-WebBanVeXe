@@ -13,9 +13,10 @@ namespace Infrastructure
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
+                options.UseNpgsql(
                     configuration.GetConnectionString("DefaultConnection"),
-                    b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
+                    b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName))
+                .UseSnakeCaseNamingConvention());
 
             // JWT Authentication
             var jwtSettings = configuration.GetSection("JwtSettings");
@@ -52,6 +53,10 @@ namespace Infrastructure
             // Route Management
             services.AddScoped<Domain.Interfaces.IRouteRepository, Infrastructure.Repositories.RouteRepository>();
             services.AddScoped<Application.Interfaces.IRouteService, Infrastructure.Services.RouteService>();
+            
+            // Booking Management
+            services.AddScoped<Application.Interfaces.IBookingRepository, Infrastructure.Repositories.BookingRepository>();
+            services.AddScoped<Application.Interfaces.IBookingService, Infrastructure.Services.BookingService>();
 
             return services;
         }
