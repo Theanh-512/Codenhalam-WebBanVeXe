@@ -15,5 +15,6 @@ namespace Domain.Entities
         public DateTime? LockExpirationTime { get; set; }
 
         public Trip? Trip { get; set; }
+        public ICollection<BookingDetail> BookingDetails { get; set; } = new List<BookingDetail>();
     }
 }

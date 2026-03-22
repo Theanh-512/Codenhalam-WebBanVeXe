@@ -13,5 +13,7 @@ namespace Domain.Entities
         public string Role { get; set; } = "Customer"; // Admin, Staff, Customer
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public bool IsActive { get; set; } = true;
+
+        public ICollection<Booking> Bookings { get; set; } = new List<Booking>();
     }
 }

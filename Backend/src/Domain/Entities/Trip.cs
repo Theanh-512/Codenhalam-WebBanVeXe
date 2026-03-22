@@ -17,5 +17,7 @@ namespace Domain.Entities
         // Navigation properties
         public Route? Route { get; set; }
         public Bus? Bus { get; set; }
+        public ICollection<Booking> Bookings { get; set; } = new List<Booking>();
+        public ICollection<Seat> Seats { get; set; } = new List<Seat>();
     }
 }

@@ -73,8 +73,8 @@ namespace Infrastructure.Persistence
             {
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.Price).HasPrecision(18, 2);
-                entity.HasOne(e => e.Route).WithMany().HasForeignKey(e => e.RouteId).OnDelete(DeleteBehavior.Restrict);
-                entity.HasOne(e => e.Bus).WithMany().HasForeignKey(e => e.BusId).OnDelete(DeleteBehavior.Restrict);
+                entity.HasOne(e => e.Route).WithMany(r => r.Trips).HasForeignKey(e => e.RouteId).OnDelete(DeleteBehavior.Restrict);
+                entity.HasOne(e => e.Bus).WithMany(b => b.Trips).HasForeignKey(e => e.BusId).OnDelete(DeleteBehavior.Restrict);
             });
 
             // Configure Seat
@@ -82,7 +82,7 @@ namespace Infrastructure.Persistence
             {
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.SeatNumber).IsRequired().HasMaxLength(10);
-                entity.HasOne(e => e.Trip).WithMany().HasForeignKey(e => e.TripId).OnDelete(DeleteBehavior.Restrict);
+                entity.HasOne(e => e.Trip).WithMany(t => t.Seats).HasForeignKey(e => e.TripId).OnDelete(DeleteBehavior.Restrict);
             });
 
             // Configure Booking
@@ -90,8 +90,8 @@ namespace Infrastructure.Persistence
             {
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.TotalAmount).HasPrecision(18, 2);
-                entity.HasOne(e => e.User).WithMany().HasForeignKey(e => e.UserId).OnDelete(DeleteBehavior.Restrict);
-                entity.HasOne(e => e.Trip).WithMany().HasForeignKey(e => e.TripId).OnDelete(DeleteBehavior.Restrict);
+                entity.HasOne(e => e.User).WithMany(u => u.Bookings).HasForeignKey(e => e.UserId).OnDelete(DeleteBehavior.Restrict);
+                entity.HasOne(e => e.Trip).WithMany(t => t.Bookings).HasForeignKey(e => e.TripId).OnDelete(DeleteBehavior.Restrict);
             });
 
             // Configure BookingDetail
@@ -99,8 +99,8 @@ namespace Infrastructure.Persistence
             {
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.Price).HasPrecision(18, 2);
-                entity.HasOne(e => e.Booking).WithMany().HasForeignKey(e => e.BookingId).OnDelete(DeleteBehavior.Restrict);
-                entity.HasOne(e => e.Seat).WithMany().HasForeignKey(e => e.SeatId).OnDelete(DeleteBehavior.Restrict);
+                entity.HasOne(e => e.Booking).WithMany(b => b.BookingDetails).HasForeignKey(e => e.BookingId).OnDelete(DeleteBehavior.Restrict);
+                entity.HasOne(e => e.Seat).WithMany(s => s.BookingDetails).HasForeignKey(e => e.SeatId).OnDelete(DeleteBehavior.Restrict);
             });
 
             // Configure Payment

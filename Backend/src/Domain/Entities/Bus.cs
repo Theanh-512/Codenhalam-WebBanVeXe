@@ -10,5 +10,7 @@ namespace Domain.Entities
         public BusType BusType { get; set; }
         public int SeatCapacity { get; set; }
         public bool IsActive { get; set; } = true;
+
+        public ICollection<Trip> Trips { get; set; } = new List<Trip>();
     }
 }
